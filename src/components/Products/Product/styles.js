@@ -4,7 +4,7 @@ export default makeStyles(()=>({
     root:{
         maxWidth:'100%'
     },
-    madia:{
+    media:{
         height:0,
         paddingTop:'56.25%',
     },

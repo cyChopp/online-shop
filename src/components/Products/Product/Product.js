@@ -18,7 +18,7 @@ const Product = ({ product ,onAddToCart}) => {
   return (
     <Card className={classes.root}>
       <CardMedia
-        className={classes.madia}
+        className={classes.media}
         image={product.media.source}
         title={product.name}
       />
