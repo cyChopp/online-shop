@@ -1,9 +1,24 @@
-import Products from './components/Products/Products';
+import { useEffect, useState } from "react";
+import { Navbar, Products } from "./components";
+import {commerce} from './lib/commerce'
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async () => {
+    const { data } = await commerce.products.list()
+
+    setProducts(data)
+  };
+
+  useEffect(() => {
+    fetchProducts()
+  }, []);
+
   return (
     <div className="App">
-      <Products/>
+      <Navbar />
+      <Products products={products}/>
     </div>
   );
 }
