@@ -10,11 +10,15 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
+import {useUpdateContext} from '../Context/ThemeContext'
+
 import useStyles from "./styles";
 
 const Navbar = ({ totalItems }) => {
   const classes = useStyles();
   const location = useLocation();
+  const toggleTheme =  useUpdateContext();
+
 
   return (
     <>
@@ -31,6 +35,9 @@ const Navbar = ({ totalItems }) => {
           </Typography>
           <div className={classes.grow} />{" "}
           {/* this div will take as much space as it need to fill the space between  Title and Buttons */}
+          <div className={classes.toggleTheme} >
+          <button  onClick={toggleTheme}>Toggle Theme</button>
+          </div>
           <div className={classes.button}>
             {location.pathname === "/" && (
               <NavLink to="/cart">

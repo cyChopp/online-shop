@@ -17,7 +17,7 @@ const Cart = ({ cart }) => {
   );
 
   const FilledCard = () => (
-    <>
+    <div  className={classes.content}>
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
@@ -50,7 +50,7 @@ const Cart = ({ cart }) => {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 
   if (!cart.line_items) {

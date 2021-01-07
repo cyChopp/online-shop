@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import {BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar, Products, Cart } from "./components";
+import DarkProvider from "./components/Context/ThemeContext";
 import { commerce } from "./lib/commerce";
 
 function App() {
@@ -32,23 +33,21 @@ function App() {
   console.log(cart);
   return (
     <Router>
-      <div>
-        <Navbar totalItems={cart.total_items} />
-        <Switch>
-          <Route exact path="/">
-            <Products products={products} onAddToCart={handleAddToCart} />
-          </Route>
-          <Route exact path="/cart">
-            <Cart cart={cart} />
-          </Route>
-        </Switch>
-      </div>
+      <DarkProvider>
+        <div>
+          <Navbar totalItems={cart.total_items} />
+          <Switch>
+            <Route exact path="/">
+              <Products products={products} onAddToCart={handleAddToCart} />
+            </Route>
+            <Route exact path="/cart">
+              <Cart cart={cart} />
+            </Route>
+          </Switch>
+        </div>
+      </DarkProvider>
     </Router>
   );
 }
 
 export default App;
-
-
-// <Route exact path="/" render={()=> <Products products={products} onAddToCart={handleAddToCart} />}/>
-//           <Route exact path="cart/" render={()=> <Cart cart={cart} />}/>
