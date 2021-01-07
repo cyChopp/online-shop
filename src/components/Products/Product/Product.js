@@ -8,12 +8,14 @@ import {
 } from "@material-ui/core";
 import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
 import React from "react";
+import { useUpdateCartContext } from "../../../Context/CartContext";
 
 import useStyles from "./styles";
 
-const Product = ({ product ,onAddToCart}) => {
-  
+const Product = ({ product }) => {
   const classes = useStyles();
+
+  const [fetchProducts, fetchCart, handleAddToCart] = useUpdateCartContext();
 
   return (
     <Card className={classes.root}>
@@ -38,7 +40,10 @@ const Product = ({ product ,onAddToCart}) => {
         />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="Add to cart"  onClick={()=>onAddToCart(product.id,1)}>
+        <IconButton
+          aria-label="Add to cart"
+          onClick={() => handleAddToCart(product.id, 1)}
+        >
           <AddShoppingCartRoundedIcon />
         </IconButton>
       </CardActions>

@@ -1,50 +1,27 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar, Products, Cart } from "./components";
-import DarkProvider from "./components/Context/ThemeContext";
-import { commerce } from "./lib/commerce";
+import CartProvider from "./Context/CartContext";
+import DarkProvider from "./Context/ThemeContext";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
-
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-
-    setProducts(data);
-  };
-
-  const fetchCart = async () => {
-    const response = await commerce.cart.retrieve();
-    setCart(response);
-  };
-
-  const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-
-    setCart(item.cart);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-    fetchCart();
-  }, []);
-
-  console.log(cart);
+ 
   return (
     <Router>
       <DarkProvider>
-        <div>
-          <Navbar totalItems={cart.total_items} />
+        <CartProvider>
+        {/* <div> */}
+          <Navbar/>
           <Switch>
             <Route exact path="/">
-              <Products products={products} onAddToCart={handleAddToCart} />
+              <Products  />
             </Route>
             <Route exact path="/cart">
-              <Cart cart={cart} />
+              <Cart  />
             </Route>
           </Switch>
-        </div>
+        {/* </div> */}
+        </CartProvider>
       </DarkProvider>
     </Router>
   );

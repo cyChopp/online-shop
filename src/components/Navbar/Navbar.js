@@ -9,16 +9,20 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useCartContext } from "../../Context/CartContext";
 
-import {useUpdateContext} from '../Context/ThemeContext'
+import {useUpdateContext} from '../../Context/ThemeContext'
 
 import useStyles from "./styles";
 
-const Navbar = ({ totalItems }) => {
+const Navbar = () => {
   const classes = useStyles();
   const location = useLocation();
   const toggleTheme =  useUpdateContext();
 
+  const [cart,products] =useCartContext()
+
+  console.log(cart)
 
   return (
     <>
@@ -47,7 +51,7 @@ const Navbar = ({ totalItems }) => {
                   aria-label="Show cart items"
                   color="inherit"
                 >
-                  <Badge badgeContent={totalItems} color="secondary"></Badge>
+                  <Badge badgeContent={cart.total_items} color="secondary"></Badge>
                   <ShoppingBasketIcon fontSize="large" />
                 </IconButton>
               </NavLink>
