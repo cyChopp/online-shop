@@ -2,12 +2,14 @@ import { Button, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
+import CartUpdateContextProvider, { useCartUpdateContext } from "../../Context/CartUpdateContext";
 import CartItem from "./CartItem/CartItem";
 
 import useStyles from "./styles";
 
 const Cart = () => {
   const [cart, products] = useCartContext();
+  const [handleUpdateCartQuantity,handleRemoveFromCart,handleEmptyCart] = useCartUpdateContext();
 
   const classes = useStyles();
 
@@ -27,7 +29,7 @@ const Cart = () => {
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
-            <CartItem item={item} />
+            <CartItem item={item} onHandleAddCartQuantity={handleUpdateCartQuantity} onHandleRemoveFromCart={handleRemoveFromCart}/>
           </Grid>
         ))}
       </Grid>
@@ -42,6 +44,7 @@ const Cart = () => {
             type="button"
             variant="contained"
             color="secondary"
+            onClick={handleEmptyCart}
           >
             Empty cart
           </Button>

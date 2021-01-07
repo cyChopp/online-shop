@@ -40,7 +40,7 @@ const CartProvider = ({ children }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={[cart, products]}>
+    <CartContext.Provider value={[cart, products,setCart]}>
       <UpdateCartContext.Provider
         value={[fetchProducts, fetchCart, handleAddToCart]}
       >

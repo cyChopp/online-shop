@@ -5,7 +5,7 @@ import useStyles from './styles'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-const CartItem = ({item}) => {
+const CartItem = ({item,onHandleAddCartQuantity,onHandleRemoveFromCart}) => {
 
    const classes = useStyles()
 
@@ -18,11 +18,11 @@ const CartItem = ({item}) => {
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <div className={classes.buttons}>
-                    <Button type='button' size='small'><AddIcon/></Button>
+                    <Button type='button' size='small' onClick={()=>onHandleAddCartQuantity(item.id,item.quantity + 1)}><AddIcon/></Button>
                     <Typography>{item.quantity}</Typography>
-                    <Button type='button' size='small'><RemoveIcon/></Button>
+                    <Button type='button' size='small' onClick={()=>onHandleAddCartQuantity(item.id,item.quantity - 1)}><RemoveIcon/></Button>
                 </div>
-                <Button variant='contained' type='button' color='primary'>Remove</Button>
+                <Button variant='contained' type='button' color='primary' onClick={()=>onHandleRemoveFromCart(item.id)} >Remove</Button>
             </CardActions>
         </Card>
     )
