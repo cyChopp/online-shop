@@ -7,22 +7,24 @@ import {
 } from "@material-ui/core";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
 
-import {useUpdateContext} from '../../Context/ThemeContext'
+import { useUpdateContext } from "../../Context/ThemeContext";
+
+import DarkModeToggle from "react-dark-mode-toggle";
 
 import useStyles from "./styles";
 
 const Navbar = () => {
   const classes = useStyles();
   const location = useLocation();
-  const toggleTheme =  useUpdateContext();
+  const [changeTheme, isThemeToggle] = useUpdateContext();
 
-  const [cart,products] =useCartContext()
+  const [cart, products] = useCartContext();
 
-  console.log(cart)
+  console.log(cart);
 
   return (
     <>
@@ -39,9 +41,12 @@ const Navbar = () => {
           </Typography>
           <div className={classes.grow} />{" "}
           {/* this div will take as much space as it need to fill the space between  Title and Buttons */}
-          <div className={classes.toggleTheme} >
-          <button  onClick={toggleTheme}>Toggle Theme</button>
-          </div>
+            <DarkModeToggle
+              onChange={changeTheme}
+              checked={isThemeToggle}
+              size={60}
+              className={classes.toggleTheme}
+            />
           <div className={classes.button}>
             {location.pathname === "/" && (
               <NavLink to="/cart">
@@ -51,8 +56,11 @@ const Navbar = () => {
                   aria-label="Show cart items"
                   color="inherit"
                 >
-                  <Badge badgeContent={cart.total_items} color="secondary"></Badge>
-                  <ShoppingBasketIcon fontSize="large" />
+                  <Badge
+                    badgeContent={cart.total_items}
+                    color="secondary"
+                  ></Badge>
+                  <ShoppingBasketIcon fontSize='large' />
                 </IconButton>
               </NavLink>
             )}

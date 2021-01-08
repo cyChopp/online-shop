@@ -28,7 +28,7 @@ const DarkProvider = ({ children }) => {
     <ThemeContext.Provider value={isThemeToggle}>
       {" "}
       {/* PASS */}
-      <ThemeUpdateContext.Provider value={changeTheme}>
+      <ThemeUpdateContext.Provider value={[changeTheme,isThemeToggle]}>
         {" "}
         {/* TOGGLE THEME CONTEXT*/}
         <ThemeProvider theme={theme}>

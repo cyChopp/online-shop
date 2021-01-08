@@ -1,6 +1,6 @@
 import { Button, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
 import CartUpdateContextProvider, { useCartUpdateContext } from "../../Context/CartUpdateContext";
 import CartItem from "./CartItem/CartItem";
@@ -49,6 +49,8 @@ const Cart = () => {
             Empty cart
           </Button>
           <Button
+            component={NavLink}
+            to='/checkout'
             className={classes.checkoutButton}
             size="large"
             type="button"

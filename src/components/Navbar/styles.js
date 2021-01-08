@@ -69,6 +69,11 @@ export default makeStyles((theme) => ({
     },
   },
   toggleTheme:{
-    marginRight:'40px'
-  }
+    marginRight:'3em',
+  },
+  // growTheme:{
+  //   display:'flex',
+  //   flexGrow: 1,
+ 
+  // }
 }));
