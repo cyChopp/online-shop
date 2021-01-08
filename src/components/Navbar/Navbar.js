@@ -24,7 +24,6 @@ const Navbar = () => {
 
   const [cart, products] = useCartContext();
 
-  console.log(cart);
 
   return (
     <>
