@@ -23,7 +23,7 @@ function App() {
               </CartUpdateContextProvider>
             </Route>
             <Route  path='/checkout'>
-            <Checkout/>
+            <Checkout  />
             </Route>
           </Switch>
           {/* </div> */}
