@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar, Products, Cart } from "./components";
-import Checkout from "./components/Checkout/Checkout";
+import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 import CartProvider from "./Context/CartContext";
 import CartUpdateContextProvider from "./Context/CartUpdateContext";
 import DarkProvider from "./Context/ThemeContext";

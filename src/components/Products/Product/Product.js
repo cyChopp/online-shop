@@ -4,6 +4,7 @@ import {
   CardContent,
   CardMedia,
   IconButton,
+  Paper,
   Typography,
 } from "@material-ui/core";
 import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
@@ -18,7 +19,7 @@ const Product = ({ product }) => {
   const [fetchProducts, fetchCart, handleAddToCart] = useUpdateCartContext();
 
   return (
-    <Card className={classes.root}>
+    <Paper square elevation={3} className={classes.root}> {/*Card instead of Paper */}
       <CardMedia
         className={classes.media}
         image={product.media.source}
@@ -47,7 +48,7 @@ const Product = ({ product }) => {
           <AddShoppingCartRoundedIcon />
         </IconButton>
       </CardActions>
-    </Card>
+    </Paper>
   );
 };
 
