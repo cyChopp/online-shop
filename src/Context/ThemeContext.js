@@ -1,6 +1,12 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
+import blueGrey from "@material-ui/core/colors/blueGrey";
+import lightGreen from "@material-ui/core/colors/lightGreen";
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
+
+
 import React, { createContext, useContext, useState } from "react";
 
 export const ThemeContext = createContext();
@@ -11,7 +17,7 @@ export const useUpdateContext = () => {
 };
 
 const DarkProvider = ({ children }) => {
-  const [isThemeToggle, setIsThemeToggle] = useState(true);
+  const [isThemeToggle, setIsThemeToggle] = useState(false);
 
   const changeTheme = () => {
     setIsThemeToggle((themeTrigger) => !themeTrigger);
@@ -20,7 +26,35 @@ const DarkProvider = ({ children }) => {
 
   const theme = createMuiTheme({
     palette: {
-      type: isThemeToggle ? "dark" : "light",
+      type:isThemeToggle ? 'dark' : 'light',
+      // background:{
+      //   paper:lightGreen[700],
+      //   light: blueGrey[300],
+      //   dark: lightGreen[700],
+
+      // },
+
+      // primary: {
+      //   main:  blueGrey[300],
+      // },
+      // secondary: {
+      //   main: '#f44336',
+      // },
+      // primary: {
+      //   light: blueGrey[300],
+      //   main: blueGrey[500],
+      //   dark: blueGrey[700],
+      //   background: blue ,
+
+      // },
+      // secondary: {
+      //   light: lightGreen[300],
+      //   main: lightGreen[500],
+      //   dark: lightGreen[700],
+      //   background: blue ,
+
+      // },
+      // type: isThemeToggle ? "dark" : "light",
     },
   });
 
@@ -28,7 +62,7 @@ const DarkProvider = ({ children }) => {
     <ThemeContext.Provider value={isThemeToggle}>
       {" "}
       {/* PASS */}
-      <ThemeUpdateContext.Provider value={[changeTheme,isThemeToggle]}>
+      <ThemeUpdateContext.Provider value={[changeTheme, isThemeToggle]}>
         {" "}
         {/* TOGGLE THEME CONTEXT*/}
         <ThemeProvider theme={theme}>

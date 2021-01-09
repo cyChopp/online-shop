@@ -16,6 +16,7 @@ import { useUpdateContext } from "../../Context/ThemeContext";
 import DarkModeToggle from "react-dark-mode-toggle";
 
 import useStyles from "./styles";
+import './nav.css'
 
 const Navbar = () => {
   const classes = useStyles();
@@ -40,12 +41,16 @@ const Navbar = () => {
           </Typography>
           <div className={classes.grow} />{" "}
           {/* this div will take as much space as it need to fill the space between  Title and Buttons */}
-            <DarkModeToggle
-              onChange={changeTheme}
-              checked={isThemeToggle}
-              size={60}
-              className={classes.toggleTheme}
-            />
+         
+
+    <div class="toggle-btn" id="_1st-toggle-btn">
+    <div onClick={changeTheme}>
+      <input type="checkbox"/>
+      <span></span>
+      </div>
+    </div>
+
+
           <div className={classes.button}>
             {location.pathname === "/" && (
               <NavLink to="/cart">

@@ -1,6 +1,7 @@
-import { Paper, Step, StepLabel, Stepper, Typography } from "@material-ui/core";
+import { Button, Paper, Step, StepLabel, Stepper, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useCartContext } from "../../../Context/CartContext";
+import { useCartUpdateContext } from "../../../Context/CartUpdateContext";
 import { commerce } from "../../../lib/commerce";
 import AddressForm from "../AddressForm/AddressForm";
 import PaymentForm from "../PaymentForm/PaymentForm";
@@ -11,16 +12,18 @@ const steps = ["Shipping details", "Payment details"];
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [shippingData,setShippingData] = useState({})
 
   const classes = useStyles();
 
   const [cart, ...rest] = useCartContext();
+  const [handleUpdateCartQuantity,handleRemoveFromCart,handleEmptyCart,handleCaptureCheckout,{order,errorMsg}] = useCartUpdateContext()
 
   const Form = () => {
     return activeStep === 0 ? (
-      <AddressForm checkoutToken={checkoutToken} />
+      <AddressForm checkoutToken={checkoutToken} next={next} />
     ) : (
-      <PaymentForm />
+      <PaymentForm  shippingData={shippingData} checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} handleCaptureCheckout={handleCaptureCheckout}/>
     );
   };
   const Confirmation = () => {
@@ -41,6 +44,18 @@ const Checkout = () => {
     };
     generateToken();
   }, [cart]);
+
+  const nextStep = ()=>(setActiveStep((prevStep)=>prevStep+1))
+  const backStep = ()=>(setActiveStep((prevStep)=>prevStep-1))
+
+  
+  const next  = (data)=>{
+    setShippingData(data);
+    nextStep()
+  }
+  const prStep = ()=>{
+    backStep()
+  }
 
   return (
     <>

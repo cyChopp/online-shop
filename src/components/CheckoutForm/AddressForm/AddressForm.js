@@ -1,4 +1,5 @@
 import {
+    Button,
     Grid,
     InputLabel,
     MenuItem,
@@ -7,10 +8,12 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import { commerce } from "../../../lib/commerce";
 import FormInput from "../TextField/TextField";
+import useStyles from './styles'
 
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken ,next}) => {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState("");
     const [shippingSybdivisions, setShippingSubdivisions] = useState([]);
@@ -19,13 +22,17 @@ const AddressForm = ({ checkoutToken }) => {
     const [shippingOption, setShippingOption] = useState("");
     const methods = useForm();
 
+    const classes = useStyles();
+
     const countries = Object.entries(shippingCountries).map(([code, name]) => ({ id: code, label: name })); // obj => array of arrays => array of objects
 
     const subdivisions = Object.entries(shippingSybdivisions).map(([code, name]) => ({ id: code, label: name })); // obj => array of arrays => array of objects
 
-    const options = shippingOptions.map((shippingOption)=>({id:shippingOption.id, label: `${shippingOption.description} - (${shippingOption.price.formatted_with_symbol})`}))
+    const options = shippingOptions.map((shippingOption) => ({ id: shippingOption.id, label: `${shippingOption.description} - (${shippingOption.price.formatted_with_symbol})` }))
 
     const fetchShippingCountries = async (checkoutTokenId) => {
+
+
         const response = await commerce.services.localeListShippingCountries(
             checkoutTokenId
         );
@@ -39,12 +46,12 @@ const AddressForm = ({ checkoutToken }) => {
         setShippingSubdivisions(response.subdivisions);
         setShippingSubdivision(Object.keys(response.subdivisions)[0])
     };
-    const fetchShippingOptions= async (checkoutTokenId,country,region) => {
-        const options = await commerce.checkout.getShippingOptions(checkoutTokenId,{ country , region});
-        
+    const fetchShippingOptions = async (checkoutTokenId, country, region) => {
+        const options = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
+
         setShippingOptions(options);
-     
-        if(options.length)setShippingOption(options[0].id)
+
+        if (options.length) setShippingOption(options[0].id)
 
     };
 
@@ -55,12 +62,16 @@ const AddressForm = ({ checkoutToken }) => {
     }, []);
 
     useEffect(() => {
-        if (shippingCountry ) fetchShippingSubdivisions(shippingCountry)
+        if (shippingCountry) fetchShippingSubdivisions(shippingCountry)
     }, [shippingCountry])
 
     useEffect(() => {
-        if (shippingSybdivision ) fetchShippingOptions(checkoutToken.id,shippingCountry,shippingSybdivision)
+        if (shippingSybdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSybdivision)
     }, [shippingSybdivision])
+
+    const handleNext =(data)=>{
+        next({...data,shippingCountry,shippingSybdivision,shippingOption})
+    }
 
     return (
         <>
@@ -68,14 +79,14 @@ const AddressForm = ({ checkoutToken }) => {
                 Shipping address
       </Typography>
             <FormProvider {...methods}>
-                <form onSubmit="">
+                <form onSubmit={methods.handleSubmit(handleNext)}>
                     <Grid container spacing={3}>
-                        <FormInput required name="firstName" label={"First name"} />
-                        <FormInput name="lastName" label={"Last name"} required />
-                        <FormInput name="address1" label={"Address"} required />
-                        <FormInput name="email" label={"Email"} required />
-                        <FormInput name="city" label={"City"} required />
-                        <FormInput name="zip" label={"ZIP"} required />
+                        <FormInput  name="firstName" label={"First name"} />
+                        <FormInput name="lastName" label={"Last name"}  />
+                        <FormInput name="address1" label={"Address"}  />
+                        <FormInput name="email" label={"Email"}  />
+                        <FormInput name="city" label={"City"}  />
+                        <FormInput name="zip" label={"ZIP"}  />
 
                         <Grid item xs={12} sm={12}>
                             <InputLabel>Shipping Country</InputLabel>
@@ -121,8 +132,13 @@ const AddressForm = ({ checkoutToken }) => {
                                 ))}
                             </Select>
                         </Grid>
-
                     </Grid>
+                    <br />
+                    <div className={classes.btnWrapper}>
+                        <Button component={NavLink} to={'/cart'} className={classes.checkoutButton} variant='outlined' color='secondary'>Back</Button>
+                        <Button type='submit' className={classes.checkoutButton} variant='contained' color='secondary'>Next</Button>
+
+                    </div>
                 </form>
             </FormProvider>
         </>
