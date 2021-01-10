@@ -16,8 +16,8 @@ import useStyles from './styles'
 const AddressForm = ({ checkoutToken ,next}) => {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState("");
-    const [shippingSybdivisions, setShippingSubdivisions] = useState([]);
-    const [shippingSybdivision, setShippingSubdivision] = useState("");
+    const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
+    const [shippingSubdivision, setShippingSubdivision] = useState("");
     const [shippingOptions, setShippingOptions] = useState([]);
     const [shippingOption, setShippingOption] = useState("");
     const methods = useForm();
@@ -26,7 +26,7 @@ const AddressForm = ({ checkoutToken ,next}) => {
 
     const countries = Object.entries(shippingCountries).map(([code, name]) => ({ id: code, label: name })); // obj => array of arrays => array of objects
 
-    const subdivisions = Object.entries(shippingSybdivisions).map(([code, name]) => ({ id: code, label: name })); // obj => array of arrays => array of objects
+    const subdivisions = Object.entries(shippingSubdivisions).map(([code, name]) => ({ id: code, label: name })); // obj => array of arrays => array of objects
 
     const options = shippingOptions.map((shippingOption) => ({ id: shippingOption.id, label: `${shippingOption.description} - (${shippingOption.price.formatted_with_symbol})` }))
 
@@ -66,11 +66,11 @@ const AddressForm = ({ checkoutToken ,next}) => {
     }, [shippingCountry])
 
     useEffect(() => {
-        if (shippingSybdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSybdivision)
-    }, [shippingSybdivision])
+        if (shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision)
+    }, [shippingSubdivision])
 
     const handleNext =(data)=>{
-        next({...data,shippingCountry,shippingSybdivision,shippingOption})
+        next({...data,shippingCountry,shippingSubdivision,shippingOption})
     }
 
     return (
@@ -106,7 +106,7 @@ const AddressForm = ({ checkoutToken ,next}) => {
                         <Grid item xs={12} sm={6}>
                             <InputLabel>Select Region</InputLabel>
                             <Select
-                                value={shippingSybdivision}
+                                value={shippingSubdivision}
                                 fullWidth
                                 onChange={(e) => setShippingSubdivision(e.target.value)}
                             >

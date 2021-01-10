@@ -2,7 +2,8 @@ import { Button, List, ListItem, ListItemText, Typography } from "@material-ui/c
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Review = ({ checkoutToken, }) => {
+const Review = ({ checkoutToken,nextStep}) => {
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -27,7 +28,6 @@ const Review = ({ checkoutToken, }) => {
           </Typography>
         </ListItem>
       </List>
-      <Button component={NavLink} to={'/cart'} variant='outlined' color='secondary'>Back</Button>
 
     </>
   );

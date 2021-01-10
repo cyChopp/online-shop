@@ -16,15 +16,15 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Products />
-            </Route>
-            <Route exact path="/cart">
-              <CartUpdateContextProvider>
+            </Route>{" "}
+            <CartUpdateContextProvider>
+              <Route exact path="/cart">
                 <Cart />
-              </CartUpdateContextProvider>
-            </Route>
-            <Route  path='/checkout'>
-            <Checkout  />
-            </Route>
+              </Route>
+              <Route path="/checkout">
+                <Checkout />
+              </Route>
+            </CartUpdateContextProvider>
           </Switch>
           {/* </div> */}
         </CartProvider>

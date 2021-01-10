@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { CssBaseline, Grid } from "@material-ui/core";
 
 
 import React from "react";
@@ -16,6 +16,8 @@ const Products = () => {
 
 
   return (
+    <>
+        <CssBaseline/>
     <main className={classes.content} >
     <div className={classes.toolbar} />
       <Grid container justify="center" spacing={4}>
@@ -26,6 +28,7 @@ const Products = () => {
         ))}
       </Grid>
     </main>
+    </>
   );
 
 };

@@ -1,15 +1,28 @@
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
-import CartUpdateContextProvider, { useCartUpdateContext } from "../../Context/CartUpdateContext";
+import CartUpdateContextProvider, {
+  useCartUpdateContext,
+} from "../../Context/CartUpdateContext";
 import CartItem from "./CartItem/CartItem";
 
 import useStyles from "./styles";
 
 const Cart = () => {
-  const [cart, products] = useCartContext();
-  const [handleUpdateCartQuantity,handleRemoveFromCart,handleEmptyCart] = useCartUpdateContext();
+  const [cart, products, setCart] = useCartContext();
+  const [
+    handleUpdateCartQuantity,
+    handleRemoveFromCart,
+    handleEmptyCart,
+    handleCaptureCheckout,
+  ] = useCartUpdateContext();
 
   const classes = useStyles();
 
@@ -29,7 +42,11 @@ const Cart = () => {
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
-            <CartItem item={item} onHandleAddCartQuantity={handleUpdateCartQuantity} onHandleRemoveFromCart={handleRemoveFromCart}/>
+            <CartItem
+              item={item}
+              onHandleAddCartQuantity={handleUpdateCartQuantity}
+              onHandleRemoveFromCart={handleRemoveFromCart}
+            />
           </Grid>
         ))}
       </Grid>
@@ -50,7 +67,7 @@ const Cart = () => {
           </Button>
           <Button
             component={NavLink}
-            to='/checkout'
+            to="/checkout"
             className={classes.checkoutButton}
             size="large"
             type="button"
@@ -69,13 +86,16 @@ const Cart = () => {
   }
 
   return (
-    <Container>
-      <div className={classes.toolbar} />
-      <Typography className={classes.title} variant="h4" gutterBottom>
-        Your shopping cart
-      </Typography>
-      {isEmpty ? <EmptyCart /> : <FilledCard />}
-    </Container>
+    <>
+      <CssBaseline />
+      <Container>
+        <div className={classes.toolbar} />
+        <Typography className={classes.title} variant="h4" gutterBottom>
+          Your shopping cart
+        </Typography>
+        {isEmpty ? <EmptyCart /> : <FilledCard />}
+      </Container>
+    </>
   );
 };
 

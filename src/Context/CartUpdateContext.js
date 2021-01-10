@@ -3,10 +3,15 @@ import { commerce } from '../lib/commerce'
 import { useCartContext } from './CartContext'
 
 const CartUpdateContext = createContext()
+const CartUpdateContextCheckout = createContext()
 
 export const useCartUpdateContext = ()=>{
     return useContext(CartUpdateContext)
 }
+export const useCartUpdateContextCheckout = ()=>{
+    return useContext(CartUpdateContextCheckout)
+}
+
 
 const CartUpdateContextProvider = ({children}) => {
 
@@ -40,16 +45,21 @@ const CartUpdateContextProvider = ({children}) => {
               const incomingOrder = await commerce.checkout.capture(ckeckoutTokenId,newOrder)
               setOrder(incomingOrder)
               refreshCart()
+              console.log('YAAAAAS')
         }catch(error){
             setErrorMsg(error.data.error.message)
         }
     }
 
     return (
-        <CartUpdateContext.Provider value={[handleUpdateCartQuantity,handleRemoveFromCart,handleEmptyCart,handleCaptureCheckout,{order,errorMsg}]}>
+        <CartUpdateContext.Provider value={[handleUpdateCartQuantity,handleRemoveFromCart,handleEmptyCart,handleCaptureCheckout]}>
+            <CartUpdateContextCheckout.Provider value={[order,errorMsg]}>
             {children}
+            </CartUpdateContextCheckout.Provider>
         </CartUpdateContext.Provider>
     )
 }
 
 export default CartUpdateContextProvider
+
+        // <CartUpdateContext.Provider value={[handleUpdateCartQuantity,handleRemoveFromCart,handleEmptyCart,handleCaptureCheckout,order,errorMsg]}>

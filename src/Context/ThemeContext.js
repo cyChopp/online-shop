@@ -27,19 +27,19 @@ const DarkProvider = ({ children }) => {
   const theme = createMuiTheme({
     palette: {
       type:isThemeToggle ? 'dark' : 'light',
-      // background:{
-      //   paper:lightGreen[700],
-      //   light: blueGrey[300],
-      //   dark: lightGreen[700],
+      background:{
+       // paper:blueGrey[700],
+        light: lightGreen[900],
+       // dark: lightGreen[700],
 
-      // },
+      },
 
-      // primary: {
-      //   main:  blueGrey[300],
-      // },
-      // secondary: {
-      //   main: '#f44336',
-      // },
+      primary: {
+        main: '#d50000',
+      },
+      secondary: {
+        main: '#d50000',
+     },
       // primary: {
       //   light: blueGrey[300],
       //   main: blueGrey[500],
