@@ -1,7 +1,9 @@
 import {
+  Box,
   Button,
   Container,
   CssBaseline,
+  Divider,
   Grid,
   Typography,
 } from "@material-ui/core";
@@ -39,9 +41,11 @@ const Cart = () => {
 
   const FilledCard = () => (
     <div className={classes.content}>
-      <Grid container spacing={3}>
+      <Box container spacing={3}>
         {cart.line_items.map((item) => (
-          <Grid item xs={12} sm={4} key={item.id}>
+          <Grid item xs={12} sm={12} key={item.id}>
+          <Divider/>
+
             <CartItem
               item={item}
               onHandleAddCartQuantity={handleUpdateCartQuantity}
@@ -49,12 +53,14 @@ const Cart = () => {
             />
           </Grid>
         ))}
-      </Grid>
+      </Box>
       <div className={classes.cartDetails}>
+      <div className={classes.subtotalBreak}>
         <Typography variant="h4">
           Subtotal : {cart.subtotal.formatted_with_symbol}
         </Typography>
-        <div>
+        </div>
+        <div className={classes.btnBreak}>
           <Button
             className={classes.emptyButton}
             size="large"

@@ -21,17 +21,23 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up('xs')]: {
       marginRight: '20px',
     },
+    borderRadius:'0px'
   },
   checkoutButton: {
     minWidth: '150px',
+    borderRadius:'0px'
+
   },
+
   link: {
     textDecoration: 'none',
   },
   cartDetails: {
     display: 'flex',
-    marginTop: '10%',
-    width: '100%',
-    justifyContent: 'space-between',
+    flexDirection:'row',
+    marginTop: '7%',
+   width: '100%',
+   justifyContent: 'space-between',
   },
+  
 }));

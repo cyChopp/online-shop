@@ -1,5 +1,6 @@
 import { makeStyles, fade } from '@material-ui/core/styles';
 
+
 const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
@@ -7,6 +8,7 @@ export default makeStyles((theme) => ({
     type:'dark'
   },
   appBar: {
+    
     boxShadow: 'none',
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
     [theme.breakpoints.up('sm')]: {
@@ -15,6 +17,7 @@ export default makeStyles((theme) => ({
     }
     },
   title: {
+    fontSize:'27px ',
     flexGrow: 1,
     alignItems: 'center',
     display: 'flex',
@@ -68,12 +71,26 @@ export default makeStyles((theme) => ({
       width: '20ch',
     },
   },
+
+  //-------- TOGGLE THEME --------//
+
   toggleTheme:{
     marginRight:'3em',
   },
-  // growTheme:{
-  //   display:'flex',
-  //   flexGrow: 1,
- 
-  // }
+  cartButtonDark:{
+    color:"white !important"
+  },
+  cartButtonLight:{
+    color:"black !important"
+  },
+  titleDark:{
+    // textTransform:'uppercase',
+    fontSize:'27px ',
+    color:'white',
+    flexGrow: 1,
+    alignItems: 'center',
+    display: 'flex',
+    textDecoration: 'none',
+  },
+
 }));

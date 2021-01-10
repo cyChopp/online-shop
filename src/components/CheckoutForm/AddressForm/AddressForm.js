@@ -75,7 +75,7 @@ const AddressForm = ({ checkoutToken ,next}) => {
 
     return (
         <>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" gutterBottom >
                 Shipping address
       </Typography>
             <FormProvider {...methods}>
@@ -89,7 +89,7 @@ const AddressForm = ({ checkoutToken ,next}) => {
                         <FormInput name="zip" label={"ZIP"}  />
 
                         <Grid item xs={12} sm={12}>
-                            <InputLabel>Shipping Country</InputLabel>
+                            <InputLabel >Shipping Country</InputLabel>
                             <Select
                                 value={shippingCountry}
                                 fullWidth

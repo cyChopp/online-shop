@@ -113,7 +113,7 @@ const Checkout = () => {
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((step) => (
               <Step key={step}>
-                <StepLabel>{step}</StepLabel>
+                <StepLabel color="primary">{step}</StepLabel>
               </Step>
             ))}
           </Stepper>

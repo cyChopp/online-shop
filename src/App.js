@@ -1,3 +1,4 @@
+import { Paper } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar, Products, Cart } from "./components";
@@ -11,8 +12,9 @@ function App() {
     <Router>
       <DarkProvider>
         <CartProvider>
-          {/* <div> */}
+
           <Navbar />
+          
           <Switch>
             <Route exact path="/">
               <Products />
@@ -26,7 +28,7 @@ function App() {
               </Route>
             </CartUpdateContextProvider>
           </Switch>
-          {/* </div> */}
+
         </CartProvider>
       </DarkProvider>
     </Router>

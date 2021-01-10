@@ -28,16 +28,16 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" className={classes.appBar} color="inherit">
+      <AppBar position="fixed" className={isThemeToggle? classes.appBarDark : classes.appBar} color="inherit">
         <Toolbar>
           <Typography
             component={NavLink}
             to="/"
             variant="h6"
-            className={classes.title}
+            className={isThemeToggle?classes.titleDark : classes.title}
             color="inherit"
           >
-            Breeab-shop
+            Breeab
           </Typography>
           <div className={classes.grow} />{" "}
           {/* this div will take as much space as it need to fill the space between  Title and Buttons */}
@@ -58,13 +58,13 @@ const Navbar = () => {
                   component={NavLink}
                   to="/cart"
                   aria-label="Show cart items"
-                  color="inherit"
+                  // color="inherit"
                 >
                   <Badge
                     badgeContent={cart.total_items}
                     color="secondary"
                   ></Badge>
-                  <ShoppingBasketIcon fontSize='large' />
+                  <ShoppingBasketIcon fontSize='large'  className={isThemeToggle ? classes.cartButtonDark : classes.cartButtonLight}/>
                 </IconButton>
               </NavLink>
             )}

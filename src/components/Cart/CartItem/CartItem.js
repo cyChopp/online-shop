@@ -10,8 +10,10 @@ const CartItem = ({item,onHandleAddCartQuantity,onHandleRemoveFromCart}) => {
    const classes = useStyles()
 
     return (
-        <Paper square elevation={2}>
-            <CardMedia image={item.media.source} alt={item.name} className={classes.media}/>
+        <CardContent className={classes.itemWrapper} square elevation={2}>
+        <div>            <CardMedia image={item.media.source} alt={item.name} className={classes.media}/>
+</div>
+            {/* <div> */}
             <CardContent className={classes.cardContent}>
                 <Typography variant='h4'>{item.name}</Typography>
                 <Typography variant='h5'>{item.line_total.formatted_with_symbol}</Typography>
@@ -22,9 +24,10 @@ const CartItem = ({item,onHandleAddCartQuantity,onHandleRemoveFromCart}) => {
                     <Typography>{item.quantity}</Typography>
                     <Button type='button' size='small' onClick={()=>onHandleAddCartQuantity(item.id,item.quantity - 1)}><RemoveIcon/></Button>
                 </div>
-                <Button variant='contained' type='button' color='primary' onClick={()=>onHandleRemoveFromCart(item.id)} >Remove</Button>
+                <Button className={classes.emptyButton} variant='contained' type='button' color='primary' onClick={()=>onHandleRemoveFromCart(item.id)} >Remove</Button>
             </CardActions>
-        </Paper>
+            {/* </div> */}
+        </CardContent>
     )
 }
 
